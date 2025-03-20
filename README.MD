@@ -25,3 +25,6 @@ If we examine the code, we can clearly notice that a lot of duplication is going
 ## commit 4 reflection notes
 
 In this update, I added a /sleep route that delays response by 10 seconds to simulate slow operations. Testing with multiple browser tabs revealed that all requests get queued behind the slow one, demonstrating a key limitation of single-threaded servers. This exercise highlights why real-world web servers need multi-threading or asynchronous processing to handle multiple users efficiently.
+
+## Commit 5 Reflection Notes
+In this update, I implemented multi-threading in the server using a thread pool that manages a fixed number of worker threads. This approach allows the server to handle multiple connections concurrently without creating unlimited threads. Now when one client requests the slow /sleep route, other clients are still served promptly by different workers in the pool, preventing slow operations from blocking the entire server. The implementation uses Rust's standard library threading capabilities, showing how relatively simple it is to add concurrency to a server application.
